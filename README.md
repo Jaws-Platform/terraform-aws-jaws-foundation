@@ -1,9 +1,9 @@
 # terraform-aws-jaws-foundation
 
-[![Terraform Registry](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.terraform.io%2Fv1%2Fmodules%2FJaws-Platform%2Fjaws-foundation%2Faws&query=%24.version&prefix=v&label=registry&logo=terraform&color=7B42BC)](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest)
-[![GitHub release](https://img.shields.io/github/v/release/Jaws-Platform/terraform-aws-jaws-foundation?label=release)](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/releases/latest)
-[![CI](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/actions/workflows/ci.yml/badge.svg?event=pull_request)](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/blob/main/LICENSE)
+[![Terraform Registry](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.terraform.io%2Fv1%2Fmodules%2Fjaws-platform%2Fjaws-foundation%2Faws&query=%24.version&prefix=v&label=registry&logo=terraform&color=7B42BC)](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest)
+[![GitHub release](https://img.shields.io/github/v/release/jaws-platform/terraform-aws-jaws-foundation?label=release)](https://github.com/jaws-platform/terraform-aws-jaws-foundation/releases/latest)
+[![CI](https://github.com/jaws-platform/terraform-aws-jaws-foundation/actions/workflows/ci.yml/badge.svg?event=pull_request)](https://github.com/jaws-platform/terraform-aws-jaws-foundation/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jaws-platform/terraform-aws-jaws-foundation/blob/main/LICENSE)
 
 The things an AWS account needs before any Terraform stack can live in it:
 one naming and tagging convention, a state bucket that only the right roles
@@ -43,12 +43,12 @@ The root module creates the first three in one call. `private-bucket` and
 
 | Module | Creates |
 |---|---|
-| [root](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest) | An account's bootstrap in one call: `context`, `tfstate-bucket`, and a `service-linked-role` per listed service. |
-| [`context`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/context) | Nothing. Derives the tag set (`Organization`, `Project`, `Environment`, `Repository`, `ManagedBy`, `Owner`) and the name prefix for a stack, known at plan time, for the provider's `default_tags`. |
-| [`tfstate-bucket`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/tfstate-bucket) | The versioned, encrypted, TLS-only S3 bucket that holds every stack's state, locked with the native `.tflock` object. Its policy can confine each key prefix to the roles that plan and apply that stack. |
-| [`private-bucket`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/private-bucket) | A versioned, encrypted, TLS-only, never-destroyed S3 bucket for data that must outlive the stack that writes it, with optional expiry for short-lived objects. |
-| [`service-linked-role`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/service-linked-role) | One IAM service-linked role, such as `AWSServiceRoleForEC2Spot`, created up front so that a role without `iam:CreateServiceLinkedRole` can use the service. Never destroyed; an existing role is imported. |
-| [`identity-center-access`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/identity-center-access) | One IAM Identity Center user with one permission set in one or more accounts: console and CLI access through `aws sso login`, with one-hour credentials and no IAM user. |
+| [root](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest) | An account's bootstrap in one call: `context`, `tfstate-bucket`, and a `service-linked-role` per listed service. |
+| [`context`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/context) | Nothing. Derives the tag set (`Organization`, `Project`, `Environment`, `Repository`, `ManagedBy`, `Owner`) and the name prefix for a stack, known at plan time, for the provider's `default_tags`. |
+| [`tfstate-bucket`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/tfstate-bucket) | The versioned, encrypted, TLS-only S3 bucket that holds every stack's state, locked with the native `.tflock` object. Its policy can confine each key prefix to the roles that plan and apply that stack. |
+| [`private-bucket`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/private-bucket) | A versioned, encrypted, TLS-only, never-destroyed S3 bucket for data that must outlive the stack that writes it, with optional expiry for short-lived objects. |
+| [`service-linked-role`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/service-linked-role) | One IAM service-linked role, such as `AWSServiceRoleForEC2Spot`, created up front so that a role without `iam:CreateServiceLinkedRole` can use the service. Never destroyed; an existing role is imported. |
+| [`identity-center-access`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/identity-center-access) | One IAM Identity Center user with one permission set in one or more accounts: console and CLI access through `aws sso login`, with one-hour credentials and no IAM user. |
 
 ## Usage
 
@@ -66,7 +66,7 @@ provider "aws" {
 }
 
 module "foundation" {
-  source  = "Jaws-Platform/jaws-foundation/aws"
+  source  = "jaws-platform/jaws-foundation/aws"
   version = "0.1.0" # x-release-please-version
 
   name_root    = "acme"
@@ -102,7 +102,7 @@ and tags its resources the same way, with `context` on its own:
 
 ```hcl
 module "context" {
-  source  = "Jaws-Platform/jaws-foundation/aws//modules/context"
+  source  = "jaws-platform/jaws-foundation/aws//modules/context"
   version = "0.1.0" # x-release-please-version
 
   name_root    = "acme"
@@ -125,9 +125,9 @@ provider "aws" {
 
 ## Examples
 
-- [`basic`](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/examples/basic):
+- [`basic`](https://github.com/jaws-platform/terraform-aws-jaws-foundation/tree/main/examples/basic):
   the tag set, the state bucket and the EC2 Spot service-linked role.
-- [`hardened-state`](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/examples/hardened-state):
+- [`hardened-state`](https://github.com/jaws-platform/terraform-aws-jaws-foundation/tree/main/examples/hardened-state):
   a state bucket whose policy gives each project's plan and apply roles their
   own key prefix and denies everyone else.
 
@@ -167,7 +167,7 @@ in the Billing console once resources carry them.
 
 ## Development
 
-See [CONTRIBUTING.md](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/blob/main/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/jaws-platform/terraform-aws-jaws-foundation/blob/main/CONTRIBUTING.md)
 for local setup, the commit and pull request rules, CI, and how releases work.
 `scripts/check.sh` runs everything CI runs, with no AWS credentials.
 
@@ -227,4 +227,4 @@ No resources.
 
 ## License
 
-[MIT](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/blob/main/LICENSE)
+[MIT](https://github.com/jaws-platform/terraform-aws-jaws-foundation/blob/main/LICENSE)

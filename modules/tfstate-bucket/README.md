@@ -1,6 +1,6 @@
 # tfstate-bucket
 
-Part of [`Jaws-Platform/jaws-foundation/aws`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/tfstate-bucket) · [Source](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/modules/tfstate-bucket)
+Part of [`jaws-platform/jaws-foundation/aws`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/tfstate-bucket) · [Source](https://github.com/jaws-platform/terraform-aws-jaws-foundation/tree/main/modules/tfstate-bucket)
 
 The S3 bucket that holds Terraform state for every stack in an account.
 Create it once per account.
@@ -29,7 +29,7 @@ Each stack stores its state at:
 project=<project>/env=<env>/<project>-<env>.tfstate
 ```
 
-The `tfstate/*` policies in [`ci-policies`](https://registry.terraform.io/modules/Jaws-Platform/jaws-ci/aws/latest/submodules/ci-policies) scope CI roles to one key
+The `tfstate/*` policies in [`ci-policies`](https://registry.terraform.io/modules/jaws-platform/jaws-ci/aws/latest/submodules/ci-policies) scope CI roles to one key
 or one prefix, so a stack's roles can only read and write its own state.
 
 ## Hardened bucket policy
@@ -103,7 +103,7 @@ terraform {
 
 ```hcl
 module "state_bucket" {
-  source  = "Jaws-Platform/jaws-foundation/aws//modules/tfstate-bucket"
+  source  = "jaws-platform/jaws-foundation/aws//modules/tfstate-bucket"
   version = "0.1.0" # x-release-please-version
 
   name = "acme-tfstate"
