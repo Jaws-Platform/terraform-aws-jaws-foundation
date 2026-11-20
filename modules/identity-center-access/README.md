@@ -1,6 +1,6 @@
 # identity-center-access
 
-Part of [`jwallace145/jaws-foundation/aws`](https://registry.terraform.io/modules/jwallace145/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/jwallace145/jaws-foundation/aws/latest/submodules/identity-center-access) · [Source](https://github.com/jwallace145/terraform-aws-jaws-foundation/tree/main/modules/identity-center-access)
+Part of [`Jaws-Platform/jaws-foundation/aws`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/identity-center-access) · [Source](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/modules/identity-center-access)
 
 One IAM Identity Center user with one permission set in one AWS account, and
 optionally in the organization's other accounts: a person's short-lived console and CLI access, with no IAM user and no access
@@ -65,7 +65,7 @@ data "aws_caller_identity" "current" {}
 data "aws_ssoadmin_instances" "this" {}
 
 module "admin" {
-  source  = "jwallace145/jaws-foundation/aws//modules/identity-center-access"
+  source  = "Jaws-Platform/jaws-foundation/aws//modules/identity-center-access"
   version = "0.1.0" # x-release-please-version
 
   instance_arn      = one(data.aws_ssoadmin_instances.this.arns)
