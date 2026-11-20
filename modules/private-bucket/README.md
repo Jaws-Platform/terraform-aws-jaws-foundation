@@ -1,6 +1,6 @@
 # private-bucket
 
-Part of [`jaws-platform/jaws-foundation/aws`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/private-bucket) · [Source](https://github.com/jaws-platform/terraform-aws-jaws-foundation/tree/main/modules/private-bucket)
+Part of [`Jaws-Platform/jaws-foundation/aws`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/private-bucket) · [Source](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/modules/private-bucket)
 
 A private S3 bucket for durable project data that must outlive the stack
 that produces it, such as the game records a bot writes. Versioned,
@@ -25,7 +25,7 @@ from the caller's provider `default_tags`.
 
 ```hcl
 module "records" {
-  source  = "jaws-platform/jaws-foundation/aws//modules/private-bucket"
+  source  = "Jaws-Platform/jaws-foundation/aws//modules/private-bucket"
   version = "0.1.1" # x-release-please-version
 
   name = "acme-chess-bot-records"
