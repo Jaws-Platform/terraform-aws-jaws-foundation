@@ -66,7 +66,7 @@ data "aws_ssoadmin_instances" "this" {}
 
 module "admin" {
   source  = "Jaws-Platform/jaws-foundation/aws//modules/identity-center-access"
-  version = "0.1.1" # x-release-please-version
+  version = "0.1.2" # x-release-please-version
 
   instance_arn      = one(data.aws_ssoadmin_instances.this.arns)
   identity_store_id = one(data.aws_ssoadmin_instances.this.identity_store_ids)
