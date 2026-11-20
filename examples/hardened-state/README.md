@@ -27,7 +27,7 @@ address:
 
 ```hcl
 module "foundation" {
-  source  = "jwallace145/jaws-foundation/aws"
+  source  = "Jaws-Platform/jaws-foundation/aws"
   version = "0.1.0" # x-release-please-version
 
   # ... names and tags as in the basic example ...
@@ -43,6 +43,6 @@ module "foundation" {
 }
 ```
 
-The [`ci-plan-role` and `ci-apply-role`](https://registry.terraform.io/modules/jwallace145/jaws-ci/aws/latest)
+The [`ci-plan-role` and `ci-apply-role`](https://registry.terraform.io/modules/Jaws-Platform/jaws-ci/aws/latest)
 modules create roles with matching `tfstate/read` and `tfstate/write`
 policies.
