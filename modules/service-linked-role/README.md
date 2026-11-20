@@ -49,7 +49,7 @@ import plans no change to it. EC2 gives its Spot role
 ```hcl
 module "spot_role" {
   source  = "jaws-platform/jaws-foundation/aws//modules/service-linked-role"
-  version = "0.1.0" # x-release-please-version
+  version = "0.1.1" # x-release-please-version
 
   aws_service_name = "spot.amazonaws.com"
   description      = "Default EC2 Spot Service Linked Role"
