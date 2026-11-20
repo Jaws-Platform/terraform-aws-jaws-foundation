@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.1...v0.1.2) (2026-11-20)
+
+
+### Bug Fixes
+
+* name the organization Jaws-Platform in addresses and links ([#10](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/issues/10)) ([57dd408](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/commit/57dd40849d97a5d5b00c584b85f4b823d4e616cd))
+
 ## [0.1.1](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.0...v0.1.1) (2026-11-20)
 
 
