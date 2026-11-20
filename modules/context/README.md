@@ -1,6 +1,6 @@
 # context
 
-Part of [`Jaws-Platform/jaws-foundation/aws`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/context) · [Source](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/modules/context)
+Part of [`jaws-platform/jaws-foundation/aws`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/context) · [Source](https://github.com/jaws-platform/terraform-aws-jaws-foundation/tree/main/modules/context)
 
 Derives the naming and tagging conventions for a project.
 This module **creates no resources**, so all of its outputs are known at plan
@@ -10,7 +10,7 @@ time and can be fed into the AWS provider's `default_tags`.
 
 ```hcl
 module "context" {
-  source  = "Jaws-Platform/jaws-foundation/aws//modules/context"
+  source  = "jaws-platform/jaws-foundation/aws//modules/context"
   version = "0.1.0" # x-release-please-version
 
   name_root    = "acme"
@@ -33,7 +33,7 @@ provider "aws" {
 
 Pass `module.context.tags` to `default_tags` in every stack. Modules in the
 Jaws families take no tag map, so this is the only place these tags are set,
-and several policies in [`ci-policies`](https://registry.terraform.io/modules/Jaws-Platform/jaws-ci/aws/latest/submodules/ci-policies) scope a CI role's permissions by
+and several policies in [`ci-policies`](https://registry.terraform.io/modules/jaws-platform/jaws-ci/aws/latest/submodules/ci-policies) scope a CI role's permissions by
 the `Project` tag (CloudFront, ACM and EC2 among them): a resource without it
 is out of that role's reach.
 

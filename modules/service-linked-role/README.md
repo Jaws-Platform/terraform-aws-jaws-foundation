@@ -1,6 +1,6 @@
 # service-linked-role
 
-Part of [`Jaws-Platform/jaws-foundation/aws`](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest/submodules/service-linked-role) · [Source](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/tree/main/modules/service-linked-role)
+Part of [`jaws-platform/jaws-foundation/aws`](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest) · [Registry](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest/submodules/service-linked-role) · [Source](https://github.com/jaws-platform/terraform-aws-jaws-foundation/tree/main/modules/service-linked-role)
 
 One IAM service-linked role: the role an AWS service assumes to act in the
 account on your behalf. AWS names it and fixes its permissions; you only choose
@@ -17,7 +17,7 @@ Without it, the launch fails with `AuthFailure.ServiceLinkedRoleCreationNotPermi
 - **Tagged `Component`**, like every module here. IAM accepts tags on
   service-linked roles, so the provider's `default_tags` apply too. The caller
   needs `iam:TagRole` on the role. The `foundation/manage` policy in
-  [`ci-policies`](https://registry.terraform.io/modules/Jaws-Platform/jaws-ci/aws/latest/submodules/ci-policies) grants it, with `service_linked_role_services`.
+  [`ci-policies`](https://registry.terraform.io/modules/jaws-platform/jaws-ci/aws/latest/submodules/ci-policies) grants it, with `service_linked_role_services`.
 
 ## `prevent_destroy` is hard-coded
 
@@ -48,7 +48,7 @@ import plans no change to it. EC2 gives its Spot role
 
 ```hcl
 module "spot_role" {
-  source  = "Jaws-Platform/jaws-foundation/aws//modules/service-linked-role"
+  source  = "jaws-platform/jaws-foundation/aws//modules/service-linked-role"
   version = "0.1.0" # x-release-please-version
 
   aws_service_name = "spot.amazonaws.com"
@@ -56,7 +56,7 @@ module "spot_role" {
 }
 ```
 
-The [root module](https://registry.terraform.io/modules/Jaws-Platform/jaws-foundation/aws/latest)
+The [root module](https://registry.terraform.io/modules/jaws-platform/jaws-foundation/aws/latest)
 creates one per entry of its `service_linked_roles` input.
 
 <!-- BEGIN_TF_DOCS -->

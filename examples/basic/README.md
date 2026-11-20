@@ -24,7 +24,7 @@ address:
 
 ```hcl
 module "foundation" {
-  source  = "Jaws-Platform/jaws-foundation/aws"
+  source  = "jaws-platform/jaws-foundation/aws"
   version = "0.1.0" # x-release-please-version
 
   name_root    = "acme"
