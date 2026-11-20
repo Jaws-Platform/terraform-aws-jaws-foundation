@@ -67,7 +67,7 @@ provider "aws" {
 
 module "foundation" {
   source  = "jaws-platform/jaws-foundation/aws"
-  version = "0.1.0" # x-release-please-version
+  version = "0.1.1" # x-release-please-version
 
   name_root    = "acme"
   organization = "acme"
@@ -103,7 +103,7 @@ and tags its resources the same way, with `context` on its own:
 ```hcl
 module "context" {
   source  = "jaws-platform/jaws-foundation/aws//modules/context"
-  version = "0.1.0" # x-release-please-version
+  version = "0.1.1" # x-release-please-version
 
   name_root    = "acme"
   organization = "acme"

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.0...v0.1.1) (2026-11-20)
+
+
+### Bug Fixes
+
+* move the registry address and links to the Jaws-Platform organization ([#6](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/issues/6)) ([7018a32](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/commit/7018a32f888f50d5ba563c9f8ffe9fd5b2ded4a9))
+* use the lowercase jaws-platform namespace in addresses and links ([#7](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/issues/7)) ([85415da](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/commit/85415daca418a2bf4c912454a1e9b07ad34ef498))
+
 ## 0.1.0 (2026-11-20)
 
 
