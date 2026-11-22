@@ -149,9 +149,27 @@ run "hardened_policy" {
       "DenyOutsidePrefix0",
       "DenyOutsidePrefix1",
       "DenyStateWritesByReaders",
+      "DenyReplicationWrites",
       "DenyUnmanagedConfiguration",
     ]
     error_message = "the hardened policy must contain exactly the documented statements, in order"
+  }
+
+  # Replication writes objects with their own actions, which the object
+  # statements above do not name: without this, anyone able to replicate a
+  # bucket into this one could overwrite any prefix's state.
+  assert {
+    condition = (
+      [for s in jsondecode(output.policy).Statement : s if s.Sid == "DenyReplicationWrites"][0].Action == [
+        "s3:ReplicateObject",
+        "s3:ReplicateDelete",
+        "s3:ReplicateTags",
+        "s3:ObjectOwnerOverrideToBucketOwner",
+      ] &&
+      [for s in jsondecode(output.policy).Statement : s if s.Sid == "DenyReplicationWrites"][0].Resource == "arn:aws:s3:::acme-technologies-tfstate/*" &&
+      jsonencode([for s in jsondecode(output.policy).Statement : s if s.Sid == "DenyReplicationWrites"][0].Condition.ArnNotEquals["aws:PrincipalArn"]) == jsonencode(var.admin_principal_arns)
+    )
+    error_message = "replication writes into any object must be denied to everyone but the admins"
   }
 
   assert {
