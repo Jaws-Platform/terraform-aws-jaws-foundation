@@ -11,7 +11,7 @@ time and can be fed into the AWS provider's `default_tags`.
 ```hcl
 module "context" {
   source  = "Jaws-Platform/jaws-foundation/aws//modules/context"
-  version = "0.1.3" # x-release-please-version
+  version = "0.2.0" # x-release-please-version
 
   name_root    = "acme"
   managed_by   = "acme-infra"

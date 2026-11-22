@@ -27,7 +27,7 @@ from the caller's provider `default_tags`.
 ```hcl
 module "records" {
   source  = "Jaws-Platform/jaws-foundation/aws//modules/private-bucket"
-  version = "0.1.3" # x-release-please-version
+  version = "0.2.0" # x-release-please-version
 
   name = "acme-chess-bot-records"
 }
@@ -42,7 +42,7 @@ also names who may reach the bucket at all:
 ```hcl
 module "records" {
   source  = "Jaws-Platform/jaws-foundation/aws//modules/private-bucket"
-  version = "0.1.3" # x-release-please-version
+  version = "0.2.0" # x-release-please-version
 
   name = "acme-chess-bot-records"
 
