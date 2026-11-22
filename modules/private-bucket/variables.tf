@@ -44,3 +44,67 @@ variable "component" {
     error_message = "component must not be empty."
   }
 }
+
+variable "access" {
+  description = <<-EOT
+    Who may reach the bucket's objects and change its configuration. `null` keeps the
+    policy to the TLS rule. With it, every statement is a deny matched on
+    `aws:PrincipalArn` (exact ARNs, no wildcards), so it bounds what IAM allows and
+    grants nothing:
+
+    - `admin_principal_arns`: may do anything, the bucket's configuration and policy
+      included. List the owner's break-glass principals and the role that applies
+      this bucket, or its next apply cannot update the policy.
+    - `writers`: prefix => principals that may add or overwrite objects under that
+      prefix (`""` is the whole bucket). Writers do not read, and only the admins
+      delete, restore or replicate objects.
+    - `readers`: prefix => principals that may read objects under that prefix.
+    - `listers`: principals that may list the bucket, and so check it exists
+      (`HeadBucket` is authorized as `s3:ListBucket`), without reading or writing
+      objects: the role that plans this bucket, whose refresh calls `HeadBucket`.
+
+    Anyone in `access` may list the bucket; nobody else may. A prefix is `""` or ends in
+    `/`, and no two prefixes of one map overlap.
+  EOT
+  type = object({
+    admin_principal_arns = list(string)
+    writers              = optional(map(list(string)), {})
+    readers              = optional(map(list(string)), {})
+    listers              = optional(list(string), [])
+  })
+  default = null
+
+  validation {
+    condition     = var.access == null || length(try(var.access.admin_principal_arns, [])) > 0
+    error_message = "access.admin_principal_arns must name at least one principal, or no one could ever change the bucket policy."
+  }
+
+  validation {
+    condition = var.access == null || alltrue([
+      for arn in concat(
+        try(var.access.admin_principal_arns, []),
+        flatten(values(try(var.access.writers, {}))),
+        flatten(values(try(var.access.readers, {}))),
+        try(var.access.listers, []),
+      ) : can(regex("^arn:aws:(iam|sts)::[0-9]{12}:[^*?]+$", arn))
+    ])
+    error_message = "Every access principal must be a full IAM or STS ARN without wildcards: aws:PrincipalArn is matched exactly."
+  }
+
+  validation {
+    condition = var.access == null || alltrue([
+      for prefix in concat(keys(try(var.access.writers, {})), keys(try(var.access.readers, {}))) :
+      prefix == "" || can(regex("^[A-Za-z0-9!_.*'()=-]+(/[A-Za-z0-9!_.*'()=-]+)*/$", prefix))
+    ])
+    error_message = "Every access prefix must be \"\" (the whole bucket) or a key prefix ending in /, such as records/."
+  }
+
+  validation {
+    condition = var.access == null || alltrue(flatten([
+      for map in [try(var.access.writers, {}), try(var.access.readers, {})] : [
+        for a in keys(map) : [for b in keys(map) : a == b || !startswith(b, a)]
+      ]
+    ]))
+    error_message = "Two prefixes of access.writers, or of access.readers, overlap: one would bypass the other's principals."
+  }
+}
