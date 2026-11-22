@@ -74,9 +74,9 @@ No resources.
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
 | environment | Deployment environment. One of `dev`, `staging`, `prod` or `preview`. | `string` | n/a | yes |
-| managed\_by | Value of the `ManagedBy` tag: the tool that manages the project's resources. | `string` | n/a | yes |
+| managed\_by | Value of the `ManagedBy` tag: the tool that manages the project's resources, such as `JAWS`. A tag value only, never part of a name. | `string` | n/a | yes |
 | name\_root | Prefix of every resource name, in kebab-case: `name_prefix` is `<name_root>-<project>-<environment>` and `bucket_name` is `<name_root>-<project>`. Independent of the `organization` tag value. | `string` | n/a | yes |
-| organization | Organization the project belongs to. Becomes the `Organization` tag. | `string` | n/a | yes |
+| organization | Organization the project belongs to, such as the GitHub organization or user that owns its repository (`Braveheart-Chess`). Becomes the `Organization` tag; names come from `name_root`, never from it. | `string` | n/a | yes |
 | owner | GitHub user responsible for the project. Becomes the `Owner` tag. | `string` | n/a | yes |
 | project | Project name in kebab-case, for example `guitar`. Used in resource names and the `Project` tag. | `string` | n/a | yes |
 | repository | GitHub repository that owns the project, as `owner/repo` (for example `acme/guitar`). | `string` | n/a | yes |

@@ -160,3 +160,45 @@ run "rejects_malformed_repository" {
 
   expect_failures = [var.repository]
 }
+
+# The Organization tag names the GitHub organization or user that owns the
+# project's repository, and ManagedBy may be any casing, such as JAWS. Neither
+# is part of a name, so neither needs kebab-case.
+run "accepts_a_github_owner_and_an_uppercase_managed_by" {
+  command = plan
+
+  variables {
+    organization = "Braveheart-Chess"
+    managed_by   = "JAWS"
+  }
+
+  assert {
+    condition     = output.tags["Organization"] == "Braveheart-Chess" && output.tags["ManagedBy"] == "JAWS"
+    error_message = "a GitHub owner and an uppercase ManagedBy must flow into the tags as given"
+  }
+
+  assert {
+    condition     = output.name_prefix == "acme-technologies-guitar-prod"
+    error_message = "names keep their name_root whatever the Organization tag says"
+  }
+}
+
+run "rejects_an_organization_that_is_not_a_github_owner" {
+  command = plan
+
+  variables {
+    organization = "Braveheart Chess"
+  }
+
+  expect_failures = [var.organization]
+}
+
+run "rejects_a_managed_by_with_spaces" {
+  command = plan
+
+  variables {
+    managed_by = "managed by jaws"
+  }
+
+  expect_failures = [var.managed_by]
+}
