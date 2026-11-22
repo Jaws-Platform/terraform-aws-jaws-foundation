@@ -28,7 +28,7 @@ address:
 ```hcl
 module "foundation" {
   source  = "Jaws-Platform/jaws-foundation/aws"
-  version = "0.1.3" # x-release-please-version
+  version = "0.2.0" # x-release-please-version
 
   # ... names and tags as in the basic example ...
 

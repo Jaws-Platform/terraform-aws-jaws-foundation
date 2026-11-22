@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.3...v0.2.0) (2026-11-22)
+
+
+### Features
+
+* **context:** accept a GitHub owner as organization and any casing of managed_by ([#16](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/issues/16)) ([3978f40](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/commit/3978f40a412e0cce550b3e87857eab5665d452c5))
+* **private-bucket:** add an opt-in hardened policy naming who may reach the bucket ([#15](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/issues/15)) ([9d90957](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/commit/9d909571f9356d5a75a57e557f29eb20dafa8afd))
+
 ## [0.1.3](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.2...v0.1.3) (2026-11-22)
 
 
