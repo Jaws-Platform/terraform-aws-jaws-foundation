@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.2...v0.1.3) (2026-11-22)
+
+
+### Bug Fixes
+
+* **tfstate-bucket:** deny replication writes into the state bucket ([#13](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/issues/13)) ([c0780d0](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/commit/c0780d0a6597c4421a05ea0199d6d5603423e1c5))
+
 ## [0.1.2](https://github.com/Jaws-Platform/terraform-aws-jaws-foundation/compare/v0.1.1...v0.1.2) (2026-11-20)
 
 
