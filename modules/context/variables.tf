@@ -9,12 +9,12 @@ variable "name_root" {
 }
 
 variable "managed_by" {
-  description = "Value of the `ManagedBy` tag: the tool that manages the project's resources."
+  description = "Value of the `ManagedBy` tag: the tool that manages the project's resources, such as `JAWS`. A tag value only, never part of a name."
   type        = string
 
   validation {
-    condition     = can(regex("^[a-z0-9]+(-[a-z0-9]+)*$", var.managed_by))
-    error_message = "managed_by must be kebab-case: lowercase letters, digits and single hyphens."
+    condition     = can(regex("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$", var.managed_by))
+    error_message = "managed_by must be letters, digits and single hyphens, such as JAWS."
   }
 }
 
@@ -64,12 +64,12 @@ variable "owner" {
 }
 
 variable "organization" {
-  description = "Organization the project belongs to. Becomes the `Organization` tag."
+  description = "Organization the project belongs to, such as the GitHub organization or user that owns its repository (`Braveheart-Chess`). Becomes the `Organization` tag; names come from `name_root`, never from it."
   type        = string
 
   validation {
-    condition     = can(regex("^[a-z0-9]+(-[a-z0-9]+)*$", var.organization))
-    error_message = "organization must be kebab-case: lowercase letters, digits and single hyphens."
+    condition     = can(regex("^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$", var.organization))
+    error_message = "organization must be a GitHub organization or user name: up to 39 letters, digits and hyphens, not starting or ending with a hyphen, such as Braveheart-Chess."
   }
 }
 
