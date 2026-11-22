@@ -68,6 +68,7 @@ Keys must not overlap. The policy then adds these statements, every one a
 | `DenyObjectsOutsidePrefixes` | Object access outside every declared prefix to anyone but the admins |
 | `DenyOutsidePrefix<N>` | Object access under prefix `N` to anyone but its readers, writers and the admins |
 | `DenyStateWritesByReaders` | Writes by read-only principals to anything but `.tflock` objects, so `terraform plan` can lock but not write state |
+| `DenyReplicationWrites` | S3 replication writes into any object (`s3:ReplicateObject`, `s3:ReplicateDelete`, `s3:ReplicateTags`, `s3:ObjectOwnerOverrideToBucketOwner`) to anyone but the admins. They are separate actions from `s3:PutObject*`, so without this a principal able to replicate a bucket into this one could overwrite any prefix's state |
 | `DenyUnmanagedConfiguration` | Bucket configuration changes, the bucket policy included, to anyone but the admins |
 
 Every statement is a deny, so being listed or exempt grants nothing: a

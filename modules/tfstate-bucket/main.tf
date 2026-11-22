@@ -70,6 +70,16 @@ locals {
     "s3:AbortMultipartUpload",
   ]
 
+  # How S3 replication writes into a destination bucket. These are separate
+  # actions from s3:PutObject* and s3:DeleteObject*, so the prefix statements
+  # do not cover them; nothing replicates into a state bucket.
+  replication_write_actions = [
+    "s3:ReplicateObject",
+    "s3:ReplicateDelete",
+    "s3:ReplicateTags",
+    "s3:ObjectOwnerOverrideToBucketOwner",
+  ]
+
   # Bucket configuration, including the bucket policy itself. Without this,
   # any principal with s3:* could replace the policy and undo the rest.
   configuration_actions = [
@@ -166,6 +176,20 @@ locals {
       } if length(readers_only) > 0
     ],
     [
+      {
+        # Without this, anyone able to replicate a bucket of theirs into this
+        # one could overwrite any prefix's state with objects of the same key.
+        Sid       = "DenyReplicationWrites"
+        Effect    = "Deny"
+        Principal = "*"
+        Action    = local.replication_write_actions
+        Resource  = "${local.bucket_arn}/*"
+        Condition = {
+          ArnNotEquals = {
+            "aws:PrincipalArn" = var.admin_principal_arns
+          }
+        }
+      },
       {
         Sid       = "DenyUnmanagedConfiguration"
         Effect    = "Deny"
